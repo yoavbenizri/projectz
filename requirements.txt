@@ -1,1 +1,3 @@
-requests zubi bubi
+requests
+flask
+sqlalchemy
