@@ -1,1 +1,1 @@
-requests zubi
+requests zubi bubi
