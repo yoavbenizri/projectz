@@ -1,3 +1,4 @@
-requests
-flask
-sqlalchemy
+requests~=2.28.2
+flask~=2.2.2
+sqlalchemy~=2.0.1
+pre-commit~=3.0.4
