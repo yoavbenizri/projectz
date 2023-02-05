@@ -1,8 +1,8 @@
 import dotenv
 import os
 
-dotenv.load_dotenv("../../../.env")
-
+ROOT_DIR = os.path.join(os.path.dirname(__file__), "../../..")
+_values = dotenv.dotenv_values(f"{ROOT_DIR}/.env")
 DATABASE_CONNECTION_STRING = (
-    f"postgresql+psycopg2://{os.environ['DB_NAME']}:projectz@localhost:5432/projectz"
+    f"postgresql+psycopg2://{_values['DB_USERNAME']}:projectz@localhost:5432/projectz"
 )
