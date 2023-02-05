@@ -1,8 +1,5 @@
-from sqlalchemy.orm import declarative_base
+from projectz.db.db_utils import engine, Base
 
-Base = declarative_base()
+from projectz.db.models.users import User
 
-from users import User
-
-
-
+Base.metadata.create_all(engine)
