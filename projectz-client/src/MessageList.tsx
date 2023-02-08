@@ -1,18 +1,35 @@
-import React from 'react';
-import Message from './Props';
+import React, { useEffect, useRef } from 'react';
+import Message from './Structs';
 
 interface Props {
     messages: Message[];
 }
 
-const MessageList: React.FC<Props> = ({ messages }) => (
-  <div className="message_list">
-    {messages.map((m, index) => (
-      <div className={"message" + (m.self ? " message_self" : "")} key={index}>
-        <p className="message_user">{m.user}</p><p className="message_body">{m.text}</p>
-      </div>
-    ))}
-  </div>
-);
+const MessageList: React.FC<Props> = ({ messages }) => {
+    const messagesEndRef = useRef<null | HTMLDivElement>(null);
+
+    useEffect(() => {
+        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }, [messages]);
+
+    return (<div className="message_list">
+        {messages.map((m, index) => {
+            return (
+                <React.Fragment>
+                    <br hidden={index > 0 && (m.self != messages[index-1].self == false)}/>
+                    <div className={"message_container" + (m.self ? " message_self" : "")}>
+                        <div className="message_status"><img className="avatar" src="https://cdn.discordapp.com/attachments/1072151742113906691/1072539783647211650/bea5bc4fab53eac491a5e9698a60706a.jpg"></img></div>
+                        <div className="message" key={index}>
+                            <p className="message_user">{m.user}</p>
+                            <p className="message_body">{m.text}</p>
+                        </div>
+                        <div className="message_spacer"></div>
+                    </div>
+                </React.Fragment>
+            );
+        })}
+        <div ref={messagesEndRef}/>
+    </div>);
+};
 
 export default MessageList;
