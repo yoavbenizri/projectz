@@ -1,99 +1,171 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+	font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+	line-height: 1.5;
+	font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+	color-scheme: light dark;
+	color: rgba(255, 255, 255, 0.87);
+	background-color: #161519;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
+	font-synthesis: none;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-text-size-adjust: 100%;
 }
+
+#root {
+    width: 1280px;
+    height: 720px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+  }
 
 a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+	font-weight: 500;
+	color: #646cff;
+	text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+	color: #535bf2;
 }
 
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+	margin: 0;
+	display: flex;
+	place-items: center;
+	min-width: 320px;
+	min-height: 100vh;
 }
 
 h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+	font-size: 3.2em;
+	line-height: 1.1;
 }
 
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
+	border-radius: 8px;
+	border: 1px solid transparent;
+	padding: 0.6em 1.2em;
+	font-size: 1em;
+	font-weight: 500;
+	font-family: inherit;
+	background-color: #313131;
+	cursor: pointer;
+	transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+	border-color: #646cff;
 }
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+	outline: 4px auto -webkit-focus-ring-color;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+input {
+	border-radius: 8px;
+	border: 1px solid #bababa;
+	padding: 0.6em 1.2em;
+	font-size: 1em;
+	font-weight: 500;
+	font-family: inherit;
+	background: none;
+	transition: border-color 0.25s;
+}
+
+input:hover {
+	border-color: #646cff;
+}
+input:focus,
+input:focus-visible {
+	outline: 4px;
+}
+
+.chat_room {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat_room > * {
+    margin: 1em 0;
+}
+
+.message_list {
+    border: 1px solid rgb(136, 136, 136);
+    border-radius: 8px;
+    padding: 1em 2em;
+    flex: auto;
+    overflow-y: auto;
+}
+
+.message_input > * {
+    margin: 5px 5px;
+}
+
+.message_container {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+}
+
+.message_container.message_self {
+    flex-direction: row-reverse;
 }
 
 .message {
-  background-color: gray;
-  border-radius: 2vh 2vh 2vh 0;
-  padding: 5px 10px 5px 10px;
-  margin: 10px;
-  width: 70%;
+	background-color: rgb(41, 42, 49);
+	border-radius: 1em 1em 1em 0;
+	padding: 8px 15px;
+	margin: 3px 0;
+    max-width: calc(100% - 300px);
 }
 
-.message.message_self {
-  background: rgb(7,209,135);
-  background: linear-gradient(90deg, rgba(7,209,135,1) 0%, rgba(107,236,14,1) 100%);
-  border-radius: 2vh 2vh 0 2vh;
-  margin-left: auto;
-  margin-right: 0;
+.message_spacer {
+    flex: 1;
+}
+
+.message_self .message {
+	background: rgb(7, 209, 135);
+	background: linear-gradient(
+		60deg,
+		rgb(250, 3, 164) 0%,
+		rgb(229, 7, 179) 100%
+	);
+	border-radius: 1em 1em 0 1em;
 }
 
 .message p {
-  margin: 5px;
-  text-align: left;
+	margin: 5px;
+	text-align: left;
+	overflow-wrap: break-word;
 }
 
 .message_user {
-  font-weight: 500;
-  color: rgb(1, 63, 1);
+	font-weight: 500;
+	color: rgb(218, 18, 221);
 }
 
-.message_self > .message_user {
-  display: none;
+.message_self .message_user {
+	display: none;
+}
+
+.message_status {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: end;
+    padding: 0 10px 0 0px;
+}
+
+.message_self .message_status {
+    padding: 0 0px 0 10px;
+}
+
+.avatar {
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
 }
