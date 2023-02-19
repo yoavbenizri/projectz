@@ -15,17 +15,18 @@ const MessageList: React.FC<Props> = ({ messages }) => {
     return (<div className="message_list">
         {messages.map((m, index) => {
             return (
-                <React.Fragment>
-                    <br hidden={index > 0 && (m.self != messages[index-1].self == false)}/>
-                    <div className={"message_container" + (m.self ? " message_self" : "")}>
-                        <div className="message_status"><img className="avatar" src="https://cdn.discordapp.com/attachments/1072151742113906691/1072539783647211650/bea5bc4fab53eac491a5e9698a60706a.jpg"></img></div>
-                        <div className="message" key={index}>
-                            <p className="message_user">{m.user}</p>
-                            <p className="message_body">{m.text}</p>
-                        </div>
-                        <div className="message_spacer"></div>
+                <div className={"message_container" + 
+                    (m.self ? " message_self" : "") + 
+                    (index == messages.length - 1 || index < messages.length-1 && m.self != messages[index+1].self ? " message_last" : "")}>
+                    <div className="message_status">
+                        <img className="avatar" src="https://cdn.discordapp.com/attachments/1072151742113906691/1072539783647211650/bea5bc4fab53eac491a5e9698a60706a.jpg"></img>
                     </div>
-                </React.Fragment>
+                    <div className="message" key={index}>
+                        <p className="message_user">{m.user}</p>
+                        <p className="message_body">{m.text}</p>
+                    </div>
+                    <div className="message_spacer"></div>
+                </div>
             );
         })}
         <div ref={messagesEndRef}/>

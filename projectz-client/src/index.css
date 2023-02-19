@@ -1,3 +1,17 @@
+@import './spring.css';
+
+@property --messageColor1 {
+    syntax: '<color>';
+    initial-value: rgb(250, 3, 164);
+    inherits: false;
+}
+
+@property --messageColor2 {
+    syntax: '<color>';
+    initial-value: rgb(229, 7, 179);
+    inherits: false;
+}
+
 :root {
 	font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 	line-height: 1.5;
@@ -96,7 +110,7 @@ input:focus-visible {
 .message_list {
     border: 1px solid rgb(136, 136, 136);
     border-radius: 8px;
-    padding: 1em 2em;
+    padding: 2em 1em;
     flex: auto;
     overflow-y: auto;
 }
@@ -109,36 +123,54 @@ input:focus-visible {
     display: flex;
     flex: 1;
     flex-direction: row;
+    padding: 3px 0;
 }
 
 .message_container.message_self {
     flex-direction: row-reverse;
 }
 
-.message {
-	background-color: rgb(41, 42, 49);
-	border-radius: 1em 1em 1em 0;
-	padding: 8px 15px;
-	margin: 3px 0;
-    max-width: calc(100% - 300px);
+.message_container.message_last {
+    margin-bottom: 1em;
 }
 
 .message_spacer {
     flex: 1;
 }
 
+.message {
+    background-color: rgb(41, 42, 49);
+    border-radius: 1em;
+    padding: 16px 20px;
+    max-width: calc(100% - 300px);
+    animation: spring 1s linear;
+}
+
 .message_self .message {
-	background: rgb(7, 209, 135);
+    background: rgb(7, 209, 135);
 	background: linear-gradient(
-		60deg,
-		rgb(250, 3, 164) 0%,
-		rgb(229, 7, 179) 100%
-	);
-	border-radius: 1em 1em 0 1em;
+        60deg,
+		var(--messageColor1) 0%,
+		var(--messageColor2) 100%
+    );
+    transition: --messageColor1 0.7s, --messageColor2 0.7s;
+}
+
+.message_self.message_last .message {
+    border-radius: 1em 1em 0em 1em;
+}
+    
+.message_last .message {
+    border-radius: 1em 1em 1em 0;
+}
+
+.message_self .message:hover {
+    --messageColor1: rgb(255, 62, 203);
+    --messageColor2: rgb(222, 86, 199);
 }
 
 .message p {
-	margin: 5px;
+    margin: 0;
 	text-align: left;
 	overflow-wrap: break-word;
 }
@@ -146,6 +178,7 @@ input:focus-visible {
 .message_user {
 	font-weight: 500;
 	color: rgb(218, 18, 221);
+    user-select: none;
 }
 
 .message_self .message_user {
@@ -153,19 +186,25 @@ input:focus-visible {
 }
 
 .message_status {
+    visibility: hidden;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: end;
-    padding: 0 10px 0 0px;
+    padding: 0 10px 0 0;
 }
 
 .message_self .message_status {
-    padding: 0 0px 0 10px;
+    padding: 0 0 0 10px;
+}
+
+.message_last .message_status {
+    visibility: inherit;
 }
 
 .avatar {
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     border-radius: 100%;
+    user-select: none;
 }
